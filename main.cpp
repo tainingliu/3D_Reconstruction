@@ -61,7 +61,7 @@ int main( int argc, char** argv )
 
     Scalar color1;
 
-    cout << "Edge map coordinates:" << endl;
+//    cout << "Edge map coordinates:" << endl;
 
     for( size_t i = 0; i < lines2.size(); i++ )
     {
@@ -76,7 +76,7 @@ int main( int argc, char** argv )
 			//if ( j == 10 )
 			//{
 				line( cdst, Point(l[0], l[1]), Point(l[2], l[3]), color1, 1, CV_AA);
-				cout << l[0] << " " << l[1] << " " << l[2] << " " << l[3] << endl;
+//				cout << l[0] << " " << l[1] << " " << l[2] << " " << l[3] << endl;
 				//imshow( "test" , cdst );
 			//}
     	}

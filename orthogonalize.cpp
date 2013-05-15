@@ -1000,12 +1000,12 @@ vector<vector<Vec4i> > orthogonalize( vector<Vec4i> edgeMap )
 			centerHeight = abs( objects[i].sideEdges[center][0] - objects[i].sideEdges[left][0] );
 			compareHeight = abs( objects[i].corners[0][0] - objects[i].corners[1][0] );
 
-			cout << centerHeight << " " << compareHeight << endl;
+//			cout << centerHeight << " " << compareHeight << endl;
 
 			z_dif = max( ( centerHeight - compareHeight ), 0 ) * imgWidth * FOCAL_LENGTH / double( centerHeight * APERTURE_WIDTH );
 			x_dif = max( ( centerHeight - compareHeight ), 0 ); //round( z_dif * centerHeight / double( imgWidth ) * ( APERTURE_WIDTH / FOCAL_LENGTH ) );
 
-			y_dif = round( z_dif * abs( objects[i].corners[center][0] - imgHeight / 2 ) / double( imgWidth * ( FOCAL_LENGTH / APERTURE_WIDTH ) - z_dif ) );
+//			y_dif = round( z_dif * abs( objects[i].corners[center][0] - imgHeight / 2 ) / double( imgWidth * ( FOCAL_LENGTH / APERTURE_WIDTH ) - z_dif ) );
 
 			cout << "Edge position change: z, x, y: " << z_dif << " " << x_dif << " " << y_dif << endl;
 
@@ -1063,23 +1063,19 @@ vector<vector<Vec4i> > orthogonalize( vector<Vec4i> edgeMap )
 	float leftWidth = abs( objects[frontObjectIndex].sideEdges[1][0] - objects[frontObjectIndex].sideEdges[0][0] );
 	float rightWidth = abs( objects[frontObjectIndex].sideEdges[2][0] - objects[frontObjectIndex].sideEdges[1][0] );
 
-	cout << leftHeight << " " << rightHeight << " " << leftWidth << " " << rightWidth << endl;
+//	cout << leftHeight << " " << rightHeight << " " << leftWidth << " " << rightWidth << endl;
 
 	float totalHeight = sqrt( ( pow( leftHeight, 2 ) + pow( leftWidth, 2 ) + pow( rightHeight, 2 ) + pow( rightWidth, 2 ) ) );
 
-	cout << totalHeight << endl;
+//	cout << totalHeight << endl;
 
-//	( pow( leftHeight, 2 ) + pow( rightHeight, 2 ) =
+	float rightTriangleLength = ( pow( abs( leftHeight - rightHeight ), 2 ) + pow( leftWidth + rightWidth, 2 ) ) - pow( rightWidth, 2 ) - pow( leftWidth, 2 );
 
-	float test = ( pow( abs( leftHeight - rightHeight ), 2 ) + pow( leftWidth + rightWidth, 2 ) ) - pow( rightWidth, 2 ) - pow( leftWidth, 2 );
-
-	float factor = sqrt( test / (  pow( leftHeight, 2 ) + pow( rightHeight, 2 ) ) );
-
-	cout << factor << endl;
+	float factor = sqrt( rightTriangleLength / (  pow( leftHeight, 2 ) + pow( rightHeight, 2 ) ) );
 
 	ANGLE_OF_INCLINATION = atan( 1 / factor ) * 180 / CV_PI;
 
-	cout << "Angle of inclination: " << ANGLE_OF_INCLINATION << endl;
+//	cout << "Angle of inclination: " << ANGLE_OF_INCLINATION << endl;
 
 	// Relative orthogonalization
 	for ( size_t i = 0; i < objects.size(); i++ )
@@ -1098,7 +1094,7 @@ vector<vector<Vec4i> > orthogonalize( vector<Vec4i> edgeMap )
 		else
 			z_dif = 0;
 
-		cout << z_dif << endl;
+//		cout << z_dif << endl;
 
 		int xMiddle = imgWidth / 2;
 		int yMiddle = imgHeight / 2;
